@@ -1,0 +1,33 @@
+body {
+  /*font-family: Helvetica, sans-serif;*/
+  font-family:Roboto !important;
+  /*background-image: url('../wood.jpg');*/
+}
+
+#popup {
+  min-width: 500px;
+  width: 500px;
+  min-height: 10px;
+  height: 300px;
+  margin: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+section{
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+.card{
+  padding:5px;
+  border:1px solid rgba(0,0,0,0.1);
+  margin:5px;
+}
+
+.heading{
+  font-size:15px;
+}
+

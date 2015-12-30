@@ -1,0 +1,19 @@
+<h1>Tabling</h1>
+
+<div><a href = '#/tablingSignup'>Sign up your slot next week</a></div>
+<h2>Your tabling slot</h2>
+<div ng-if = 'mySlot != null'>
+	<div>{{timeString(mySlot.time)}}</div>
+	<ul>
+		<li ng-repeat = 'email in mySlot.member_emails'>{{memberHash[email].name}}</li>
+	</ul>
+</div>
+<div><a href = '#/tablingSwitch'>Awww mannnnn I can't make my tabling slot</a></div>
+<h2>Tabling Schedule</h2>
+<div><input type = 'text' class = 'form-control' placeholder = 'Search Tabling Slots' ng-model = 'searchTerm'></div>
+<div ng-repeat = 'slot in tablingSchedule | orderBy:"time" | filter: searchTerm'>
+	<div>{{timeString(slot.time)}}</div>
+	<ul>
+		<li ng-repeat = 'email in slot.member_emails'>{{memberHash[email].name}}</li>
+	</ul>
+</div>

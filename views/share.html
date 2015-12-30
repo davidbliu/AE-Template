@@ -1,0 +1,23 @@
+<h1>Share</h1>
+
+<div>
+	<a href = 'javascript:void(0)' ng-click = 'setup = true' ng-show = 'setup == null || setup == false'>Set up sharing</a>
+	<a href = 'javascript:void(0)' ng-click = 'setup = false' ng-show = 'setup != null && setup == true'>Hide setup</a>
+</div>
+
+<div><a href = '#/compose'>Compose</a></div>
+
+<section ng-show = 'setup != null && setup == true'>
+	<h2>Set up sharing</h2>
+	<p ng-show = 'message != null'><b>Message:</b> {{message}}<p>
+	<button class = 'btn btn-default' ng-click = 'getChromeID()'>Get My Chrome ID</button>
+	<p>Once you have your chrome id, enter it here to be registered for push notifications and other good stuff</p>
+	<input type = 'text' class = 'form-control' placeholder = 'chrome id' ng-model = 'chromeID'>
+	<button class = 'btn btn-default' ng-click = 'submitChromeID(chromeID)'>Register Chrome ID</button> 
+</section>
+
+<section >
+	<h2>Messages</h2>
+	<input type = 'text' class = 'form-control' placeholder = 'Search Messages'>
+	<div ng-repeat = 'message in messages'>{{message}}</div>
+</section>

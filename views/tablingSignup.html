@@ -1,0 +1,4 @@
+<h1>When would you like to table next week?</h1>
+<div ng-repeat = 'slot in weeklySlots | orderBy:"time"'>
+	{{timeString(slot.time)}} <div class = 'label label-default'>{{slotCapacity(slot)}} remaining</div>
+</div>

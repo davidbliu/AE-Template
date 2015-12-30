@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html ng-app="mem" ng-csp>
+    <head>
+        <link rel="stylesheet" href="css/popup.css">
+        <link rel = "stylesheet" href = "css/bootstrap.min.css">
+
+
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/lib/angular.min.js"></script>
+        <script src = "js/lib/angular-route.js"></script>
+        <link rel = 'stylesheet' href = 'css/angular-csp.css'>
+        <script src = 'wd_utils.js'></script>
+
+
+
+
+        <script src="lib/underscore-min.js"></script>
+        <script src="lib/parse-1.6.7.min.js"></script>
+        <script src = 'parse.js'></script>
+        <script src = 'app.js'></script>
+        <script src="js/app/popup.js"></script>
+
+        <!-- include controllers -->
+        
+        <script src = 'controllers/home.js'></script>
+        <script src = 'controllers/old.js'></script>
+        <!--<script src = 'controllers/links.js'></script>-->
+        <!--<script src = 'controllers/share.js'></script>-->
+        <!--<script src = 'controllers/tabling.js'></script>-->
+        <!--<script src = 'controllers/tablingSignup.js'></script>-->
+        <!--<script src = 'controllers/tablingSwitch.js'></script>-->
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    </head>
+    <body id="popup">
+      <div class = 'jumbotron'>
+        <a href = '#/old'>old</a>
+        <a href = '#/'>new</a>
+      </div>
+        <div ng-view=''></div>
+    </body>
+</html>

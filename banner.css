@@ -1,0 +1,78 @@
+#content-banner #lookup-results{
+  color:white !important;
+  overflow:auto;
+  background-color:none;
+}
+#content-banner #thumbnail-img{
+  width:100%;
+}
+#content-banner #add-group{
+  margin-bottom:15px;
+}
+#content-banner #add-group #key-input{
+  color:black !important;
+  font-size:12px;
+  font-family:Helvetica;
+}
+
+#content-banner .golink{
+  float:left !important;
+  width:45%;
+  padding:3px;
+  margin:3px;
+}
+
+#content-banner .golink:hover{
+  /*border:1px solid white;*/
+}
+
+#content-banner .golink a{
+  color:white;
+  float:left;
+}
+#content-banner .golink img{
+  width:100%;
+}
+#content-banner.twbs h1 h2 h3 h4 h5 h6{
+  color:white !important;
+}
+#content-banner.twbs a{
+  color:white !important;
+}
+#content-banner h3>img{
+  height:50px;
+}
+#content-banner .options-div{
+  margin-left:25%;
+  padding:5px;
+  margin:3px;
+  cursor:pointer;
+}
+#content-banner{
+  font-size:15px;
+  font-family:Helvetica;
+  top:0px; 
+  left:0px;
+  right:0px;
+  position:fixed;
+  width:41%;
+  height:100%;
+  background-color:rgba(0,0,0,0.75);
+  z-index:2147483647;
+  color:white;
+  overflow:auto;
+  padding:25px;
+}
+#content-banner .favicon-img{
+  height:20px;
+}
+.tab-div{
+  padding:3px;
+}
+.tab-div:hover{
+  left:10px;
+}
+#content-banner .add-icon:hover{
+  font-weight:bold;
+  cursor:pointer;
+}

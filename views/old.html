@@ -1,0 +1,21 @@
+<style type = 'text/css'>
+.result-img{
+  height:100px;
+}
+</style>
+
+<h1>old</h1>
+<h3>{{msg}}</h3>
+<div>{{url}}</div>
+<div><input type = 'text' ng-model = 'key'></input></div>
+<div class = 'btn btn-success' ng-click = 'createGolink()'>Create</div>
+<div>
+  <img src = '{{image}}' height = '200'></img>
+</div>
+<div>
+  <h3>Matching links</h3>
+  <div ng-repeat = 'result in results'>
+    {{result.get("key")}}
+    <img src = '{{result.get("image").url()}}' class = 'result-img' ng-click = 'setImage(result)'></img>
+  </div>
+</div>
