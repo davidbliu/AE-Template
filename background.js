@@ -48,6 +48,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.name == 'shareStart'){
     chrome.tabs.query({title:'COPILOT'}, function(tabs){
       copilotTab = tabs[0];
+      //send some
+      chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
+        chrome.tabs.sendMessage(copilotTab.id, {name:'tabChange', tabs:tabs, id:myId});
+      });
       sendResponse(copilotTab);
     });
   }
