@@ -1,4 +1,6 @@
 var copilotTab;
+var ROOT_URL = 'http://wd.berkeley-pbl.com/david/real.html';
+//var ROOT_URL = 'http://localhost/cli/real.html';
 myApp.controller("MainCtrl", function ($scope) {
   chrome.extension.sendMessage({name:'getCopilotTab'}, function(tab){
     copilotTab = tab;
@@ -18,7 +20,7 @@ myApp.controller("MainCtrl", function ($scope) {
 
   $scope.copilotRedirect = function(){
     if(copilotTab == null){
-      chrome.tabs.create({url:'http://localhost/cli/real.html', active:true}, function(tab){
+      chrome.tabs.create({url:ROOT_URL, active:true}, function(tab){
         chrome.extension.sendMessage({name:'setCopilotTab', copilotTab: tab}, null);
       });
     }

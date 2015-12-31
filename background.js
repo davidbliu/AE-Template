@@ -1,5 +1,5 @@
-//var copilotSite = 'http://wd.berkeley-pbl.com/david/real.html';
-var copilotSite = 'http://localhost/cli/real.html';
+var copilotSite = 'http://wd.berkeley-pbl.com/david/real.html';
+//var copilotSite = 'http://localhost/cli/real.html';
 var tabScreenshots = {};
 var copilotTab;
 var myEmail;
