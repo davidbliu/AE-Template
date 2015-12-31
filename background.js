@@ -1,5 +1,3 @@
-var copilotSite = 'http://wd.berkeley-pbl.com/david/real.html';
-//var copilotSite = 'http://localhost/cli/real.html';
 var tabScreenshots = {};
 var copilotTab;
 var myEmail;
@@ -78,7 +76,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 var TAB_CHANGE_RATE= 1000; 
-ROOT_URL = 'http://wd.berkeley-pbl.com/copilot/api.php';
 
 chrome.tabs.onActivated.addListener(function(activeInfo){
   if(copilotTab != null && copilotTab.windowId == activeInfo.windowId){
@@ -88,7 +85,10 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
   }
 });
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-  if(copilotTab != null && changeInfo.status != 'loading' && tab.windowId == copilotTab.windowId){
+  if(copilotTab != null && tab.windowId == copilotTab.windowId){
+    if(tab.status == 'complete'){
+      chrome.tabs.sendMessage(copilotTab.id, {name:'history', tab:tab});
+    }
     chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
       chrome.tabs.sendMessage(copilotTab.id, {name:'tabChange', tabs:tabs, id:myId});
     });

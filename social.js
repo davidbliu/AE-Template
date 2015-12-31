@@ -34,4 +34,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
       bookmarks: $('#bookmarks-div').html()
     });
   }
+  if(message.name == 'history'){
+    message.type = 'extension';
+    window.postMessage(message, '*');
+  }
 });
