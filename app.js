@@ -1,14 +1,10 @@
-﻿var myApp = angular.module('mem', ['ngRoute']);
+﻿var myApp = angular.module('copilotApp', ['ngRoute']);
 
 myApp.config(function($routeProvider) {
     $routeProvider
-        .when('/old', {
-            templateUrl : 'views/home.html',
-            controller  : 'HomeController'
-        })
         .when('/', {
-          templateUrl: 'views/old.html',
-          controller: 'OldController',
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
         })
         .otherwise({
           'redirect_to': '/'

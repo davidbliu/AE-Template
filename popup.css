@@ -1,18 +1,17 @@
 body {
   font-family:Roboto !important;
-  width:200px;
-  text-align:center;
   padding:20px;
+  width:500px;
+  height:500px;
+}
+.active-tab{
+  background-color:rgba(0,0,0,0.1);
 }
 
-#popup {
-  /*min-width: 500px;*/
-  /*width: 200px;*/
-  /*min-height: 10px;*/
-  /*height: 300px;*/
-  /*margin: 12px;*/
-  /*-webkit-user-select: none;*/
-  /*-moz-user-select: none;*/
-  /*-ms-user-select: none;*/
-  /*user-select: none;*/
+.favicon-img{
+  height:20px;
+}
+
+.tab-icons{
+  display:none;
 }

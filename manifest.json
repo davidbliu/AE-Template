@@ -5,10 +5,10 @@
 
 	"description": "PBL's very own app",
 	"icons": {
-		"128": "img/bieber.png"
+		"128": "mushroom_red.png"
 	},
 	"browser_action": {
-		"default_icon": "img/bieber.png",
+		"default_icon": "mushroom_red.png",
 		"default_popup": "popup.html",
 		"default_title": "PBL App"
 	},

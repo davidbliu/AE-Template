@@ -1,15 +1,22 @@
 ﻿<!DOCTYPE html>
-<html ng-app="mem" ng-csp>
+<html ng-app="copilotApp" ng-csp>
     <head>
-        <link rel="stylesheet" href="popup.css">
-        <link rel = "stylesheet" href = "css/bootstrap.min.css">
-
-
-        <script src="js/lib/jquery.min.js"></script>
-        <script src = 'popup.js'></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link rel = "stylesheet" href = "./bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel = "stylesheet" href = "./bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot">
+        <link rel="stylesheet" href="popup.css">
+        <script src="./js/lib/jquery.min.js"></script>
+        <script src="js/lib/angular.min.js"></script>
+        <script src = "js/lib/angular-route.js"></script>
+        <link rel = 'stylesheet' href = 'css/angular-csp.css'>
+        <script src="lib/underscore-min.js"></script>
+        <script src="lib/parse-1.6.7.min.js"></script>
+        <script src = 'parse.js'></script>
+
+        <script src = 'app.js'></script>
+        <script src = 'controllers/main.js'></script>
     </head>
-    <body id="popup">
-        <h3>Wtcha Dodo?</h3>
+    <body id="popup"> 
+      <div ng-view=''></div>
     </body>
 </html>

@@ -1,3 +1,5 @@
+//var copilotSite = 'http://wd.berkeley-pbl.com/david/real.html';
+var copilotSite = 'http://localhost/cli/real.html';
 var tabScreenshots = {};
 var copilotTab;
 var myEmail;
@@ -11,15 +13,33 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.name == 'getId'){
     sendResponse({id:myId});
   }
-  if(request.name =='open_webpage'){
+  if(request.name == 'getCopilotTab'){
+    sendResponse(copilotTab);
+  }
+  if(request.name == 'setCopilotTab'){
+    console.log('setting copilot tab');
+    copilotTab = request.copilotTab;
+  }
+  if(request.name =='popup_request'){
     if(copilotTab != null){
-      chrome.tabs.update(copilotTab.id, {selected:true});
-    }
-    else{
-      chrome.tabs.create({url:'http://wd.berkeley-pbl.com/david/real.html'}, function(tab){
-        copilotTab = tab;
+      chrome.tabs.sendMessage(copilotTab.id, {name:'popup'}, function(response){
+        sendResponse(response);
       });
     }
+    else{
+      sendResponse({html:'<h1>no copilot tab open</h1>'});
+    }
+  }
+  if(request.name =='open_webpage'){
+    console.log('temporarily disabled');
+    //if(copilotTab != null){
+      //chrome.tabs.update(copilotTab.id, {selected:true});
+    //}
+    //else{
+      //chrome.tabs.create({url:copilotSite}, function(tab){
+        //copilotTab = tab;
+      //});
+    //}
   }
   if (request.name == 'screenshot') {
       chrome.tabs.captureVisibleTab(null, {quality:5}, function(dataUrl) {
@@ -45,21 +65,28 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     registerForPush();
     sendResponse('hi noresponse');
   }
-  if(request.name == 'shareStart'){
-    chrome.tabs.query({title:'COPILOT'}, function(tabs){
-      copilotTab = tabs[0];
-      //send some
-      chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
-        chrome.tabs.sendMessage(copilotTab.id, {name:'tabChange', tabs:tabs, id:myId});
-      });
-      sendResponse(copilotTab);
-    });
-  }
+  //if(request.name == 'shareStart'){
+    //chrome.tabs.query({title:'COPILOT'}, function(tabs){
+      //copilotTab = tabs[0];
+      ////send some
+      //chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
+        //chrome.tabs.sendMessage(copilotTab.id, {name:'tabChange', tabs:tabs, id:myId});
+      //});
+      //sendResponse(copilotTab);
+    //});
+  //}
 });
 
 var TAB_CHANGE_RATE= 1000; 
 ROOT_URL = 'http://wd.berkeley-pbl.com/copilot/api.php';
 
+chrome.tabs.onActivated.addListener(function(activeInfo){
+  if(copilotTab != null && copilotTab.windowId == activeInfo.windowId){
+    chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
+      chrome.tabs.sendMessage(copilotTab.id, {name:'tabChange', tabs:tabs, id:myId});
+    });
+  }
+});
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
   if(copilotTab != null && changeInfo.status != 'loading' && tab.windowId == copilotTab.windowId){
     chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
