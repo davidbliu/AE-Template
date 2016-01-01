@@ -1,0 +1,17 @@
+#comment-box{
+  background-color:rgba(0,0,0,0.5);
+  height:500px;
+  width:500px;
+  position:fixed;
+  left:10px;
+  top:10px;
+  z-index:500000;
+}
+.dodo-comment-div{
+  background-color:rgba(0,0,0,0.5);
+  padding:5px;
+  position:absolute;
+  z-index:500000;
+  color:white;
+
+}

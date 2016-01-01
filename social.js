@@ -6,6 +6,9 @@ window.addEventListener('message', function(event){
   if(event.data.type && event.data.type == 'copilot_webpage'){
     handleWebpageMessage(event.data);
   }
+  if(event.data && event.data.name && event.data.name == 'updateComments'){
+    chrome.extension.sendMessage(event.data, null);
+  }
 });
 
 
@@ -36,6 +39,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
   }
   if(message.name == 'history'){
     message.type = 'extension';
+    window.postMessage(message, '*');
+  }
+  if(message.name == 'postComment'){
+    console.log('copilot content script received comment');
+    console.log(message.comment);
+    message.type = 'extension';
+    console.log(message);
     window.postMessage(message, '*');
   }
 });

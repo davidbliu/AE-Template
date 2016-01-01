@@ -5,7 +5,8 @@
 
 	"description": "PBL's very own app",
 	"icons": {
-		"128": "mushroom_red.png"
+            "16": "mushroom_red.png",
+            "128": "mushroom_red.png"
 	},
 	"browser_action": {
 		"default_icon": "mushroom_red.png",
@@ -18,13 +19,35 @@
 	  },
 	"omnibox": { "keyword" : "pbl" },
 	"content_scripts": [ {
-          "js": [ "./lib/jquery.min.js", "./lib/underscore-min.js", "./lib/parse-1.6.7.min.js", "./parse.js", "banner.js", "social.js", "content.js" ],
+          "js": [ "./lib/jquery.min.js",
+            "./lib/underscore-min.js",
+            "./lib/parse-1.6.7.min.js",
+            "./parse.js",
+            "banner.js",
+            "social.js",
+            "comment.js",
+            "key_shortcuts.js",
+            "content.js" 
+          ],
           "matches": [ "<all_urls>" ],
-          "css": ["./lib/scoped-twbs.min.css", "banner.css"],
+          "css": ["./lib/scoped-twbs.min.css", 
+            "banner.css",
+            "./css/comment.css"
+          ],
           "run_at": "document_end"
 	} ],
 	"minimum_chrome_version": "18",
         "web_accessible_resources" : ["banner.html"],
+        "commands":{
+          "_open_copilot_tab": {
+            "suggested_key":{
+              "default": "Ctrl+Shift+Y",
+              "mac": "Command+Shift+Y"
+            },
+            "description": "Open Copilot Tab", 
+            "global":true
+          } 
+        },
 	"permissions": [ 
             "<all_urls>",
             "http://*/*", 

@@ -11,6 +11,35 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.name == 'getId'){
     sendResponse({id:myId});
   }
+  if(request.name == 'updateComments'){
+    console.log('background: updating comments');
+    console.log(request);
+    chrome.tabs.query({url:request.url}, function(tabs){
+      if(tabs.length > 0){
+        var tab = tabs[0];
+        chrome.tabs.sendMessage(tab.id, request, function(response){});
+      }
+    });
+  }
+  if(request.name == 'postComment'){
+    if(copilotTab == null){
+      alert('No copilot session open, comment failed to post');
+    }
+    else{
+      console.log('sending comment along');
+      console.log(request.comment);
+      chrome.tabs.sendMessage(copilotTab.id, {name:'postComment', comment:request.comment}, function(response){
+      });
+    }
+  }
+  if(request.name == 'openCopilotTab'){
+    if(copilotTab){
+      chrome.tabs.update(copilotTab.id, {active:true}, function(tab){});
+    }
+    else{
+      chrome.tabs.create({url:'popup.html'});
+    }
+  }
   if(request.name == 'getCopilotTab'){
     sendResponse(copilotTab);
   }
@@ -107,3 +136,18 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
     }
   }
 });
+
+chrome.contextMenus.create({
+    "title": "Add Comment",
+    "contexts": ["page", "selection", "image", "link"],
+    "onclick" : addCommentHandler
+  });
+  function addCommentHandler(e){
+    console.log(e);
+    var comment = prompt("Comment on this page", "");
+    if (comment != null){
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {name: "comment", comment:comment}, function(response) { });
+      });
+    }
+  }

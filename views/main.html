@@ -1,5 +1,22 @@
-<div class = 'btn btn-default' ng-click = 'copilotRedirect()'>Open in webpage</div>
-{{msg}}
+<div ng-show = 'nocopilot'>
+  <div class = 'pull-right btn btn-default' ng-click = 'copilotRedirect()'>
+    <img src = './mushroom_red.png' height = '25px'> 
+    Open Copilot
+  </div>
+  <h3>{{msg}}</h3>
+  <div> <img src = './mushroom_sad.png' height = '200'> </div>
+  <p>Open a copilot tab to start sharing Wtcha Dodo with your friends!</p>
+</div>
+<div ng-show = 'nocopilot == null' class = 'pull-right'>
+  <div class = 'btn btn-default' ng-click = 'copilotRedirect()'>
+    <img src = './mushroom_red.png' height = '25px'> Show Webpage (Ctrl + p)
+  </div>
+  <!--<div class = 'btn btn-default' ng-click = 'copilotRedirect()'>-->
+    <!--<i class = 'glyphicon glyphicon-bookmark'></i> Bookmarks -->
+  <!--</div>-->
+</div>
+
+<div id = 'collaborators-div'></div>
 <div id = 'tabs-div'></div>
 <div id = 'bookmarks-div'></div>
 
