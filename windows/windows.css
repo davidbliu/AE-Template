@@ -1,0 +1,14 @@
+#dodo-active-window{
+  min-width:300px;
+  position:fixed;
+  z-index:500000;
+  right:0px;
+  padding:15px;
+}
+.twbs .profile-img{
+  border-radius:1000px;
+  height:25px;
+}
+.twbs .favicon-img{
+  height:25px;
+}

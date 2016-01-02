@@ -30,15 +30,24 @@ var backgroundHandler = {
     callback(copilotTab);
   },
   setCopilotTab: function(message, callback){
-    console.log('background: setting copilot tab');
     copilotTab = message.copilotTab;
   },
   activeChanged: function(message, callback){
-    console.log('background: activeChanged');
-    console.log(message);
     myActive = message.active;
     userDict = message.userDict;
     // send data to 
+    chrome.tabs.query({active:true},function(tabs){
+      tab = tabs[0];
+      msg = {
+        api:'mapi',
+        sender:'background',
+        recipient:'content',
+        active:myActive,
+        type:'active',
+        userDict:userDict
+      };
+      chrome.tabs.sendMessage(tab.id, msg);
+    });
   },
   getState: function(message, callback){
     callback({active:myActive, userDict: userDict});

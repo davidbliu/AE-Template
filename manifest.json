@@ -31,14 +31,14 @@
             "./lib/parse-1.6.7.min.js",
             "./parse.js",
             "shared.js",
-            "banner.js",
+            "windows/active.js",
             "comment.js",
             "mapi/copilot.js",
-            "mapi/content.js",
-            "content.js" 
+            "mapi/content.js"
           ],
           "matches": [ "<all_urls>" ],
           "css": ["./lib/scoped-twbs.min.css", 
+            "windows/windows.css",
             "banner.css",
             "./css/comment.css"
           ],

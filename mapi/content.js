@@ -28,6 +28,11 @@ var contentHandlers = {
   },
   updateComments:function(message){
     updateComments(message.comments);
+  },
+  active:function(message){
+    console.log('content: active received');
+    showActiveWindow(message.active, message.userDict);
   }
+
 
 };
