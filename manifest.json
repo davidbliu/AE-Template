@@ -14,7 +14,14 @@
 		"default_title": "PBL App"
 	},
 	"background": {
-	    "scripts": ["js/lib/jquery.min.js", "./lib/underscore-min.js","./lib/parse-1.6.7.min.js", "parse.js" ,"push.js", "background.js"], 
+	    "scripts": ["js/lib/jquery.min.js",
+              "./lib/underscore-min.js",
+              "./lib/parse-1.6.7.min.js",
+              "parse.js",
+              "push.js",
+              "shared.js",
+              "mapi/background.js",
+              "background.js"], 
             "matches":["*://*/*"]
 	  },
 	"omnibox": { "keyword" : "pbl" },
@@ -23,10 +30,11 @@
             "./lib/underscore-min.js",
             "./lib/parse-1.6.7.min.js",
             "./parse.js",
+            "shared.js",
             "banner.js",
-            "social.js",
             "comment.js",
-            "key_shortcuts.js",
+            "mapi/copilot.js",
+            "mapi/content.js",
             "content.js" 
           ],
           "matches": [ "<all_urls>" ],

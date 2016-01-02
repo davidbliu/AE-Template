@@ -4,6 +4,10 @@ body {
   width:500px;
   height:500px;
 }
+.block{
+  display:block;
+  clear:both !important;
+}
 .collaborator-img{
   border-radius:1000px;
 }

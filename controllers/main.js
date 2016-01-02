@@ -1,14 +1,19 @@
 var copilotTab;
-var ROOT_URL = 'http://wd.berkeley-pbl.com/david/real.html';
-//var ROOT_URL = 'http://localhost/cli/real.html';
+
 myApp.controller("MainCtrl", function ($scope) {
-  chrome.extension.sendMessage({name:'getCopilotTab'}, function(tab){
+chrome.extension.sendMessage({api:'mapi', recipient:'background', type:'getCopilotTab'}, function(tab){
     copilotTab = tab;
     if(copilotTab != null){
-      chrome.tabs.sendMessage(copilotTab.id, {name:'popup'}, function(response){
+      msg = {
+        api:'mapi',
+        recipient:'copilot',
+        sender:'popup',
+        type:'getPopupHtml'
+      };
+      chrome.tabs.sendMessage(copilotTab.id, msg, function(response){
         $('#tabs-div').html(response.tabs);
         $('#bookmarks-div').html(response.bookmarks);
-        $('#collaborators-div').html(response.collaborators);
+        //$('#collaborators-div').html(response.collaborators);
         scrollTabs();
         $scope.$digest();
       });
@@ -18,12 +23,41 @@ myApp.controller("MainCtrl", function ($scope) {
       $scope.nocopilot = true;
       $scope.$digest();
     }
-  });
+});
+
+stateMsg = {
+  api:'mapi',
+  recipient:'background',
+  sender:'popup',
+  type:'getState'
+}
+
+chrome.extension.sendMessage(stateMsg, function(data){
+  $scope.active = data.active;
+  $scope.userDict = data.userDict;
+  $scope.userIds = _.keys(data.userDict);
+  $scope.$digest();
+});
 
   $scope.copilotRedirect = function(){
     if(copilotTab == null){
-      chrome.tabs.create({index:0, url:ROOT_URL, active:true}, function(tab){
-        chrome.extension.sendMessage({name:'setCopilotTab', copilotTab: tab}, null);
+      chrome.tabs.query({title:'COPILOT'}, function(tabs){
+        var tabids = _.map(tabs, function(x){
+          return x.id;
+        });
+        chrome.tabs.remove(tabids, function(){
+          chrome.tabs.create({index:0, url:ROOT_URL, active:true}, function(tab){
+            copilotTab = tab;
+            msg = {
+              api: 'mapi',
+              sender:'popup',
+              recipient:'background',
+              type:'setCopilotTab',
+              copilotTab:tab
+            };
+            chrome.extension.sendMessage(msg, null);
+          });
+        });
       });
     }
     else{

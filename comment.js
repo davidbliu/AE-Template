@@ -30,29 +30,6 @@ $(document).mousedown(function(e){
   console.log('clicked on '+e.pageX+','+e.pageY);
 });
 $(document).ready(function(){
-
-function updateComments(comments){
-  $('.dodo-comment-div').each(function(){
-    $(this).remove();
-  });
-  _.each(comments, function(comment){
-    insertComment(comment);
-  });
-}  
-
-function insertComment(comment){
-  var cdiv = $('<div></div>');
-  $(cdiv).addClass('dodo-comment-div');
-  $(cdiv).text(comment.content);
-  $(cdiv).css('left', '0px');
-  $(cdiv).css('top', '0px');
-  $(document.body).prepend(cdiv);
-  $(cdiv).animate({
-    left:'+='+comment.left+'px',
-    top:'+='+comment.top+'px'
-  },100);
-}  
-
 //get comments on initial load
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
   if(request.name && request.name == 'comment'){
@@ -75,4 +52,49 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
   }
 });
 
-});
+}); //end of document.ready thing
+
+
+
+
+
+
+function updateComments(comments){
+  $('.dodo-comment-div').each(function(){
+    $(this).remove();
+  });
+  _.each(comments, function(comment){
+    insertComment(comment);
+  });
+}  
+
+function insertComment(comment){
+  var cdiv = $('<div></div>');
+  $(cdiv).addClass('dodo-comment-div');
+  $(cdiv).text(comment.content);
+  $(cdiv).css('left', '0px');
+  $(cdiv).css('top', '0px');
+  $(document.body).prepend(cdiv);
+  $(cdiv).animate({
+    top:'+='+comment.top+'px'
+  },100);
+}  
+
+function createComment(content){
+  comment = {
+    content:content,
+    left: mouseX, 
+    top:mouseY,
+    url:window.location.href
+  }
+  var msg = {
+    api:'mapi',
+    recipient:'copilot_webpage',
+    sender:'content',
+    type:'postComment',
+    comment:comment
+  }
+  console.log(msg);
+  chrome.extension.sendMessage(msg, null);
+  insertComment(comment);
+}

@@ -1,3 +1,11 @@
+<div ng-show = 'nocopilot == null' class = 'pull-right'>
+  <div>
+    <div class = 'btn btn-default' ng-click = 'copilotRedirect()'>
+      <img src = './mushroom_red.png' height = '25px'> Show Webpage 
+    </div>
+  </div>
+</div>
+
 <div ng-show = 'nocopilot'>
   <div class = 'pull-right btn btn-default' ng-click = 'copilotRedirect()'>
     <img src = './mushroom_red.png' height = '25px'> 
@@ -7,16 +15,23 @@
   <div> <img src = './mushroom_sad.png' height = '200'> </div>
   <p>Open a copilot tab to start sharing Wtcha Dodo with your friends!</p>
 </div>
-<div ng-show = 'nocopilot == null' class = 'pull-right'>
-  <div class = 'btn btn-default' ng-click = 'copilotRedirect()'>
-    <img src = './mushroom_red.png' height = '25px'> Show Webpage (Ctrl + p)
+
+<div class = 'block row' ng-show = 'nocopilot == null'>
+  <ul class = 'list-group'>
+  <li class = 'list-group-item' ng-repeat = 'key in userIds'>
+    <span class = 'user-div'>
+      <img src = 'http://{{userDict[key].photoUrl}}' class = 'collaborator-img'>
+      <a href = 'javascript:void(0)' class = 'collaborator-link' id = '{{key}}-link'>{{userDict[key].displayName}}</a>
+    </span>
+    :
+    <span ng-show = 'active[key]'>
+      <img src = '{{active[key].favIconUrl}}' class = 'favicon-img'>
+      <a href = '{{active[key].url}}' target = '_blank'>{{active[key].title}}</a>
+    </span>
   </div>
-  <!--<div class = 'btn btn-default' ng-click = 'copilotRedirect()'>-->
-    <!--<i class = 'glyphicon glyphicon-bookmark'></i> Bookmarks -->
-  <!--</div>-->
 </div>
 
 <div id = 'collaborators-div'></div>
-<div id = 'tabs-div'></div>
 <div id = 'bookmarks-div'></div>
+<div id = 'tabs-div'></div>
 
