@@ -20,17 +20,17 @@ if(request.api && request.api == 'mapi' && isValidMapiRequest(request)){
 
 var contentHandlers = {
   test:function(message){
-    console.log('content: handling test mapi message');
+    //console.log('content: handling test mapi message');
   },
   newComment:function(message){
-    console.log('content: new comment was created');
+    //console.log('content: new comment was created');
     createComment(message.comment);
   },
   updateComments:function(message){
     updateComments(message.comments);
   },
   active:function(message){
-    console.log('content: active received');
+    //console.log('content: active received');
     showActiveWindow(message.active, message.userDict);
   }
 

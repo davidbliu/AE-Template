@@ -31,7 +31,7 @@ var backgroundHandler = {
   },
   setCopilotTab: function(message, callback){
     //copilotTab = message.copilotTab;
-    console.log("deprecated");
+    //console.log("deprecated");
   },
   activeChanged: function(message, callback){
     myActive = message.active;

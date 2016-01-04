@@ -23,20 +23,20 @@ window.addEventListener('message', function(event){
 });
 
 function handleCopilotMessage(message, callback){
-  console.log('copilot: handleCopilotMessage called');
-  console.log(message);
+  //console.log('copilot: handleCopilotMessage called');
+  //console.log(message);
   if(message.type == 'getPopupHtml'){
     response = {};
     response.tabs = $('#tabs-div').html();
     response.bookmarks = $('#bookmarks-div').html();
     response.collaborators = $('#collaborators-div').html();
-    console.log(response);
+    //console.log(response);
     callback(response);
   }
 }
 var copilotHandlers = {
   test:function(message){
-    console.log('copilot: this was a mapi test');
+    //console.log('copilot: this was a mapi test');
   }
 }
 
