@@ -37,7 +37,7 @@ function showActiveWindow(active, userDict){
     var activeDiv = createActiveDiv(active[key], userDict[key]);
     $('#dodo-active-list').append(activeDiv);
   });
-  $('#dodo-active-window').fadeOut(5000, function(){
+  $('#dodo-active-window').fadeOut(3000, function(){
     $('#dodo-active-window').remove();
   });
 }

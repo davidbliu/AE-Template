@@ -3,17 +3,37 @@
     <div class = 'btn btn-default' ng-click = 'copilotRedirect()'>
       <img src = './mushroom_red.png' height = '25px'> Show Webpage 
     </div>
+    <div class = 'btn btn-default' ng-click = 'stopSharing()'>
+      <img src = './mushroom_blue.png' height = '25px'> Stop Sharing
+    </div>
   </div>
 </div>
 
 <div ng-show = 'nocopilot'>
-  <div class = 'pull-right btn btn-default' ng-click = 'copilotRedirect()'>
-    <img src = './mushroom_red.png' height = '25px'> 
-    Open Copilot
-  </div>
-  <h3>{{msg}}</h3>
+  <h3>You're not sharing yet!</h3>
   <div> <img src = './mushroom_sad.png' height = '200'> </div>
-  <p>Open a copilot tab to start sharing Wtcha Dodo with your friends!</p>
+  <p>Sign onto a #channel to start sharing Wtcha Dodo with your friends!</p>
+  <div>
+    <div class = 'btn btn-default' ng-click = 'copilotRedirect()'>
+      <img src = './mushroom_red.png' height = '35px'> 
+      <span>Try it out!</span>
+    </div>
+    <!--<span> We'll send you to the #main channel</span>-->
+  </div>
+  <!--<div>-->
+    <!--<div class = 'btn btn-default' ng-click = 'createSession()'>-->
+      <!--<img src = './mushroom_blue.png' height = '35px'> -->
+      <!--<span>Custom Channel<span>-->
+    <!--</div>-->
+    <!--<span> Have a custom #channel already?</span>-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--<div class = 'btn btn-default' ng-click = 'createRedirect()'>-->
+      <!--<img src = './mushroom_friends.png' height = '35px'> -->
+      <!--<span>Create a Channel<span>-->
+    <!--</div>-->
+    <!--<span> Create a custom channel</span>-->
+  <!--</div>-->
 </div>
 
 <div class = 'block row' ng-show = 'nocopilot == null'>

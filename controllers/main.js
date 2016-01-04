@@ -1,6 +1,17 @@
 var copilotTab;
 
 myApp.controller("MainCtrl", function ($scope) {
+
+  $scope.stopSharing = function(){
+    msg = {
+      api:'mapi',
+      sender:'popup',
+      recipient:'background',
+      type:'closeCopilot'
+    }
+    chrome.extension.sendMessage(msg, null);
+    window.close();
+  }
 chrome.extension.sendMessage({api:'mapi', recipient:'background', type:'getCopilotTab'}, function(tab){
     copilotTab = tab;
     if(copilotTab != null){
@@ -13,8 +24,8 @@ chrome.extension.sendMessage({api:'mapi', recipient:'background', type:'getCopil
       chrome.tabs.sendMessage(copilotTab.id, msg, function(response){
         $('#tabs-div').html(response.tabs);
         $('#bookmarks-div').html(response.bookmarks);
-        //$('#collaborators-div').html(response.collaborators);
         scrollTabs();
+        activateLinks();
         $scope.$digest();
       });
     }
@@ -39,6 +50,10 @@ chrome.extension.sendMessage(stateMsg, function(data){
   $scope.$digest();
 });
 
+
+$scope.createRedirect = function(){
+  chrome.tabs.create({url:CREATE_URL, index:0, active:true}, null);
+};
   $scope.copilotRedirect = function(){
     if(copilotTab == null){
       chrome.tabs.query({title:'COPILOT'}, function(tabs){
@@ -48,14 +63,14 @@ chrome.extension.sendMessage(stateMsg, function(data){
         chrome.tabs.remove(tabids, function(){
           chrome.tabs.create({index:0, url:ROOT_URL, active:true}, function(tab){
             copilotTab = tab;
-            msg = {
-              api: 'mapi',
-              sender:'popup',
-              recipient:'background',
-              type:'setCopilotTab',
-              copilotTab:tab
-            };
-            chrome.extension.sendMessage(msg, null);
+            //msg = {
+              //api: 'mapi',
+              //sender:'popup',
+              //recipient:'background',
+              //type:'setCopilotTab',
+              //copilotTab:tab
+            //};
+            //chrome.extension.sendMessage(msg, null);
           });
         });
       });
@@ -73,5 +88,21 @@ function scrollTabs(id){
       tabs_id = id + '-tabs';
       $("html, body").animate({ scrollTop: $('#'+tabs_id).offset().top }, 100);
     });
+  }, 1000);
+}
+
+function activateLinks(){
+  setTimeout(function(){
+    $('.dodo-link').click(function(){
+      msg = {
+        api:'mapi',
+        sender:'copilot_webpage',
+        recipient:'background',
+        type:'redirectLink',
+        url: $(this).attr('data-url'),
+        tabId: $(this).attr('data-tabid') 
+      }
+      chrome.extension.sendMessage(msg, null);
+  });
   }, 1000);
 }

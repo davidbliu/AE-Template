@@ -3,6 +3,11 @@ var copilotTab;
 var myEmail;
 var myId;
 
+chrome.browserAction.setIcon({path:{
+  19: './mushroom_red.png',
+  38: './mushroom_red.png'
+}});
+
 //track realtime api models
 var myActive;
 var userDict;
@@ -23,6 +28,22 @@ function sendTabs(tabs){
   chrome.tabs.sendMessage(copilotTab.id, msg);
 }
 
+function handleCopilotDisconnect(){
+  copilotTab = null;
+  chrome.browserAction.setIcon({path:{
+    19: './mushroom_red.png',
+    38: './mushroom_red.png'
+  }});
+}
+
+function handleCopilotConnect(tab){
+  copilotTab = tab;
+  chrome.browserAction.setIcon({path:{
+    19: './mushroom_pair.png',
+    38: './mushroom_pair.png'
+  }});
+}
+
 chrome.tabs.onActivated.addListener(function(activeInfo){
   if(copilotTab != null && copilotTab.windowId == activeInfo.windowId){
     chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){
@@ -32,6 +53,12 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 });
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
   if(copilotTab != null && tab.windowId == copilotTab.windowId){
+    //check if navigated away from copilot
+    if(tab.id == copilotTab.id){
+      if(tab.title != 'COPILOT'){
+        handleCopilotDisconnect();
+      }
+    }
     if(tab.status == 'complete'){
       msg = {
         api:'mapi',
@@ -51,7 +78,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
   if(copilotTab != null){
     if(tabId == copilotTab.id){
-      copilotTab = null;
+      handleCopilotDisconnect();
     }
     else{
       chrome.tabs.query({windowId:copilotTab.windowId}, function(tabs){

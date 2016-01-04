@@ -30,7 +30,8 @@ var backgroundHandler = {
     callback(copilotTab);
   },
   setCopilotTab: function(message, callback){
-    copilotTab = message.copilotTab;
+    //copilotTab = message.copilotTab;
+    console.log("deprecated");
   },
   activeChanged: function(message, callback){
     myActive = message.active;
@@ -51,7 +52,47 @@ var backgroundHandler = {
   },
   getState: function(message, callback){
     callback({active:myActive, userDict: userDict});
+  },
+  connectCopilot: function(message, callback){
+    chrome.tabs.query({title:'COPILOT'}, function(tabs){
+      if(tabs.length > 0){
+        handleCopilotConnect(tabs[0]);
+        // send tabs as an ACK
+        chrome.tabs.query({windowId: copilotTab.windowId}, function(tabs){
+          sendTabs(tabs);
+        });
+      }
+    });
+  },
+  closeCopilot: function(message, callback){
+    if(copilotTab != null){
+      chrome.tabs.remove(copilotTab.id, null);
+    }
+  },
+  removeTab: function(message, callback){
+    chrome.tabs.remove(message.tab.id, null);
+  },
+  redirectLink: function(message, callback){
+    chrome.tabs.query({url: message.url}, function(tabs){
+      if(tabs.length == 0){
+        try{
+          chrome.tabs.get(parseInt(message.tabId), function(tab){
+            if(tab != null && tab.id != null){
+              chrome.tabs.update(tab.id, {active:true}, null);
+            }
+            else{
+              chrome.tabs.create({active:true,url:message.url},null);
+            }
+          });
+        }
+        catch(err){
+            chrome.tabs.create({active:true, url:message.url}, null);
+        }
+      }
+      else{
+        chrome.tabs.update(tabs[0].id, {active:true}, null);
+      }
+    });
   }
-
 };
 

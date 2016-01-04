@@ -1,15 +1,15 @@
 ﻿{
-	"name": "PBL App",
+	"name": "WtchaDodo",
 	"version": "1.0",
 	"manifest_version": 2,
 
-	"description": "PBL's very own app",
+	"description": "Share Wtcha Dodo with your friends",
 	"icons": {
-            "16": "mushroom_red.png",
-            "128": "mushroom_red.png"
+            "16": "mushroom_pair.png",
+            "128": "mushroom_pair.png"
 	},
 	"browser_action": {
-		"default_icon": "mushroom_red.png",
+		"default_icon": "mushroom_pair.png",
 		"default_popup": "popup.html",
 		"default_title": "PBL App"
 	},
@@ -32,7 +32,6 @@
             "./parse.js",
             "shared.js",
             "windows/active.js",
-            "comment.js",
             "mapi/copilot.js",
             "mapi/content.js"
           ],
