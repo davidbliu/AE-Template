@@ -16,15 +16,13 @@
 	"background": {
 	    "scripts": ["js/lib/jquery.min.js",
               "./lib/underscore-min.js",
-              "./lib/parse-1.6.7.min.js",
               "background.js"], 
             "matches":["*://*/*"]
 	  },
 	"omnibox": { "keyword" : "pbl" },
 	"content_scripts": [ {
           "js": [ "./lib/jquery.min.js",
-            "./lib/underscore-min.js",
-            "./lib/parse-1.6.7.min.js"
+            "./lib/underscore-min.js"
           ],
           "matches": [ "<all_urls>" ],
           "css": [

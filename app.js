@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('copilotApp', ['ngRoute']);
+﻿var myApp = angular.module('ngApp', ['ngRoute']);
 
 myApp.config(function($routeProvider) {
     $routeProvider
