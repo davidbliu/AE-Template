@@ -2,57 +2,56 @@
 	"name": "Template",
 	"version": "1.0",
 	"manifest_version": 2,
-
-	"description": "Davids Angular Extension Template",
+	"description": "Angular Extension Template",
 	"icons": {
-            "16": "mushroom_friends.png",
-            "128": "mushroom_friends.png"
+		"16": "img/default_icon.png",
+		"128": "img/default_icon.png"
 	},
 	"browser_action": {
-		"default_icon": "mushroom_friends.png",
+		"default_icon": "img/default_icon.png",
 		"default_popup": "popup.html",
-		"default_title": "PBL App"
+		"default_title": "Angular Template"
 	},
 	"background": {
-	    "scripts": ["js/lib/jquery.min.js",
-              "./lib/underscore-min.js",
-              "background.js"], 
-            "matches":["*://*/*"]
+		"scripts": [
+			"js/lib/jquery.min.js",
+			"js/lib/underscore-min.js",
+			"background.js"], 
+			"matches":["*://*/*"]
 	  },
 	"omnibox": { "keyword" : "pbl" },
 	"content_scripts": [ {
-          "js": [ "./lib/jquery.min.js",
-            "./lib/underscore-min.js"
-          ],
-          "matches": [ "<all_urls>" ],
-          "css": [
-            "./lib/scoped-twbs.min.css" 
-          ],
-          "run_at": "document_end"
+		"js": [ 
+			"js/lib/jquery.min.js",
+			"js/lib/underscore-min.js"
+		],
+		"matches": [ "<all_urls>" ],
+		"css": [],
+		"run_at": "document_end"
 	} ],
 	"minimum_chrome_version": "18",
-        "web_accessible_resources" : ["banner.html"],
+		"web_accessible_resources" : ["banner.html"],
 	"permissions": [ 
-            "<all_urls>",
-            "http://*/*", 
-            "https://*/*", 
-            "unlimitedStorage", 
-            "contextMenus", 
-            "cookies", 
-            "tabs", 
-            "notifications",
-            "storage",
-	    "activeTab",
-	    "identity",
-	    "identity.email",
-	    "http://*/",
-	    "https://*/",
-	    "notifications",
-	    "gcm",
-	    "http://fonts.googleapis.com/",
-            "https://fonts.googleapis.com/",
-            "https://apis.google.com/js/api.js", 
-            "file:///*"
+		"<all_urls>",
+		"http://*/*", 
+		"https://*/*", 
+		"unlimitedStorage", 
+		"contextMenus", 
+		"cookies", 
+		"tabs", 
+		"notifications",
+		"storage",
+		"activeTab",
+		"identity",
+		"identity.email",
+		"http://*/",
+		"https://*/",
+		"notifications",
+		"gcm",
+		"http://fonts.googleapis.com/",
+		"https://fonts.googleapis.com/",
+		"https://apis.google.com/js/api.js", 
+		"file:///*"
 	]
 
 }
